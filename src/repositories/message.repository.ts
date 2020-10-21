@@ -1,6 +1,6 @@
 import {DefaultCrudRepository} from '@loopback/repository';
 import {Message, MessageRelations} from '../models';
-import {MysqlDataSource} from '../datasources';
+import {MemoryDataSource} from '../datasources';
 import {inject} from '@loopback/core';
 
 export class MessageRepository extends DefaultCrudRepository<
@@ -9,7 +9,7 @@ export class MessageRepository extends DefaultCrudRepository<
   MessageRelations
 > {
   constructor(
-    @inject('datasources.mysql') dataSource: MysqlDataSource,
+    @inject('datasources.memory') dataSource: MemoryDataSource,
   ) {
     super(Message, dataSource);
   }

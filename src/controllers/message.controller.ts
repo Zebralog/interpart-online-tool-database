@@ -19,7 +19,7 @@ import {
 import {Message} from '../models';
 import {MessageRepository} from '../repositories';
 
-export class MessagesController {
+export class MessageController {
   constructor(
     @repository(MessageRepository)
     public messageRepository : MessageRepository,
@@ -39,12 +39,12 @@ export class MessagesController {
         'application/json': {
           schema: getModelSchemaRef(Message, {
             title: 'NewMessage',
-            
+            exclude: ['id'],
           }),
         },
       },
     })
-    message: Message,
+    message: Omit<Message, 'id'>,
   ): Promise<Message> {
     return this.messageRepository.create(message);
   }
