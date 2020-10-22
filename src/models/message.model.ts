@@ -48,9 +48,9 @@ export class Message extends Entity {
 
   @property({
     type: 'date',
+    'default': "$now"
   })
   timestamp?: string;
-
 
   constructor(data?: Partial<Message>) {
     super(data);
