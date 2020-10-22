@@ -16,7 +16,10 @@ export class Message extends Entity {
   bell_id: string;
 
   @property({
+    name: 'message',
+    description: "The main message content.",
     type: 'string',
+    'dataType': "text",
     required: true,
   })
   message: string;
