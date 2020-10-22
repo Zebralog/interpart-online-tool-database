@@ -1,18 +1,20 @@
 name: interpart-backend
 recipe: mean
 config:
-  node: 12 
+  node: 12
   database: mariadb
-  port: '3000' 
+  port: '3000'
   ssl: true
   scanner: false
   portforward: true
   globals:
     '@loopback/cli': latest
-#services:
-#  mysql:
-#    type: mariadb
-#    portforward: true
+services:
+  appserver:
+    scanner: false
+  database:
+    type: mariadb
+    portforward: 32770
 #    creds:
 #      user: interpart
 #      password: interpart
@@ -28,7 +30,7 @@ config:
 #    #config:
 #    #  database: custom.conf
 tooling:
-  lb4: 
+  lb4:
     service: appserver
   npm:
     service: appserver
