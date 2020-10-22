@@ -18,13 +18,16 @@ import {
 } from '@loopback/rest';
 import {Message} from '../models';
 import {MessageRepository} from '../repositories';
+import {authenticate} from '@loopback/authentication';
 
+// @authenticate('jwt') // apply authentication decorator to the whole controller
 export class MessageController {
   constructor(
     @repository(MessageRepository)
     public messageRepository : MessageRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/messages', {
     responses: {
       '200': {
@@ -84,6 +87,7 @@ export class MessageController {
     return this.messageRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/messages', {
     responses: {
       '200': {
@@ -125,6 +129,7 @@ export class MessageController {
     return this.messageRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/messages/{id}', {
     responses: {
       '204': {
@@ -146,6 +151,7 @@ export class MessageController {
     await this.messageRepository.updateById(id, message);
   }
 
+  @authenticate('jwt')
   @put('/messages/{id}', {
     responses: {
       '204': {
@@ -160,6 +166,7 @@ export class MessageController {
     await this.messageRepository.replaceById(id, message);
   }
 
+  @authenticate('jwt')
   @del('/messages/{id}', {
     responses: {
       '204': {
