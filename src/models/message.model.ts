@@ -22,6 +22,12 @@ export class Message extends Entity {
   message: string;
 
   @property({
+    type: 'string',
+    required: true,
+  })
+  language: string;
+
+  @property({
     type: 'object',
   })
   translations?: object;
