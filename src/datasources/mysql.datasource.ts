@@ -1,16 +1,6 @@
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
-
-const config = {
-  name: 'mysql',
-  connector: 'mysql',
-  url: 'mysql://mean:mean@127.0.0.1:32802/mean',
-  host: '127.0.0.1',
-  port: 32802,
-  user: 'mean',
-  password: 'mean',
-  database: 'mean'
-};
+import {config} from './mysql.datasource.local';
 
 // Observe application's life cycle to disconnect the datasource when
 // application is stopped. This allows the application to be shut down

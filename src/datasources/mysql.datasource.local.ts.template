@@ -1,0 +1,10 @@
+export const config = {
+  name: 'mysql',
+  connector: 'mysql',
+  url: 'mysql://USER:ENCODED_PWD@HOST:PORT/DBNAME',
+  host: 'HOST',
+  port: PORT,
+  user: 'USER',
+  password: 'PWD',
+  database: 'DBNAME'
+};
