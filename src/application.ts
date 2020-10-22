@@ -53,7 +53,6 @@ export class InterpartBackendApplication extends BootMixin(
     this.component(JWTAuthenticationComponent);
     // Bind datasource
     this.dataSource(MysqlDataSource, UserServiceBindings.DATASOURCE_NAME);
-    //new
     this.bind(UserServiceBindings.USER_SERVICE).toClass(MyUserService);
   }
 }

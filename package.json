@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "lb-tsc",
+    "build:start": "npm run build && npm start",
     "build:watch": "lb-tsc --watch",
     "lint": "npm run prettier:check && npm run eslint",
     "lint:fix": "npm run eslint:fix && npm run prettier:fix",
