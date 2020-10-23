@@ -3,7 +3,7 @@ recipe: mean
 config:
   node: 12
   database: mariadb
-  port: '3000'
+  port: '4321'
   ssl: true
   scanner: false
   portforward: true

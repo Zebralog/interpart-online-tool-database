@@ -1,5 +1,6 @@
 import {ApplicationConfig} from '@loopback/core';
 import {InterpartBackendApplication} from './application';
+import {local} from './env.local';
 
 /**
  * Export the OpenAPI spec from the application
@@ -7,8 +8,8 @@ import {InterpartBackendApplication} from './application';
 async function exportOpenApiSpec(): Promise<void> {
   const config: ApplicationConfig = {
     rest: {
-      port: +(process.env.PORT ?? 3000),
-      host: process.env.HOST ?? 'localhost',
+      port: +(local.port ?? (process.env.PORT ?? 3000)),
+      host: local.host ?? (process.env.HOST ?? 'localhost'),
     },
   };
   const outFile = process.argv[2] ?? '';
