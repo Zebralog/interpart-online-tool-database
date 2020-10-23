@@ -129,6 +129,8 @@ export class UserController {
     },
   })
   async signUp(
+    @inject(SecurityBindings.USER)
+    currentUserProfile: UserProfile,
     @requestBody({
       content: {
         'application/json': {
@@ -139,14 +141,25 @@ export class UserController {
       },
     })
     newUserRequest: NewUserRequest,
-  ): Promise<User> {
-    const password = await hash(newUserRequest.password, await genSalt());
-    const savedUser = await this.userRepository.create(
-      _.omit(newUserRequest, 'password'),
-    );
+  ): Promise<User|object> {
+    if(currentUserProfile && currentUserProfile.name == 'administrator') {
+      const password = await hash(newUserRequest.password, await genSalt());
+      const savedUser = await this.userRepository.create(
+          _.omit(newUserRequest, 'password'),
+      );
 
-    await this.userRepository.userCredentials(savedUser.id).create({password});
+      await this.userRepository.userCredentials(savedUser.id).create({password});
 
-    return savedUser;
+      return savedUser;
+    }
+    else {
+      return {
+        error: {
+          name: "UnauthorizedError",
+          message: "You don't have the permission to create new accounts. Sorry!",
+          user: currentUserProfile ? `${currentUserProfile.name} [${currentUserProfile.id}]` : '[not-authenticated]'
+        }
+      };
+    }
   }
 }
