@@ -1,36 +1,59 @@
 # Developer's Guide
 
-We use Visual Studio Code for developing LoopBack and recommend the same to our
-users.
+Brief guide to setup the Loopback REST application in your local system.
+A `lando` working setup will be needed.
 
-## VSCode setup
+## Setting up the system
 
-Install the following extensions:
+* move to your project's folder, and start lando: `lando start`
+* copy the sample general local configuration: 
+  ```bash
+  cp src/env.local.ts.template src/env.local.ts
+  ```
+  and if needed change the relevant values.
+* copy the sample datasource local configuration: 
+  ```bash
+  cp src/datasources/mysql.datasource.local.ts.template src/datasources/mysql.datasource.local.ts
+  ```
+* set database connection data into this file; if the `.lando.yml` file was not change, this configuration should work:
+```javascript
+    export const config = {
+      name: 'mysql',
+      connector: 'mysql',
+      url: 'mysql://mean:mean@127.0.0.1:32770/mean',
+      host: '127.0.0.1',
+      port: 32770,
+      user: 'mean',
+      password: 'mean',
+      database: 'mean'
+    };
+```
+* obtain and import a SQL dump of the database [TODO: expand on this...]:
+  ```bash
+    lando db-import ./path/to/database/dump.sql
+  ```
+* once the machine is up and running, build the node dependencies: `npm ci`
+* try building the application: `npm run build`
+* check if database migrations are needed: `npm run migrate`
+* start the API: `npm run start`
+* the API should be live on `http://127.0.0.1:4321` (or different host/port in case you customized the `env.local.ts` file)
+* try exploring the API on `http://127.0.0.1:4321/explore`
 
- - [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
- - [prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## Starting / stopping the server
 
-## Development workflow
+#### to start:
+* start lando: `lando start`
+* (re)build if needed: `npm run build`
+* start the server: `npm run start`
 
-### Visual Studio Code
+#### to stop:
+* stop the running npm server process
+* stop lando: `lando stop`
 
-1. Start the build task (Cmd+Shift+B) to run TypeScript compiler in the
-   background, watching and recompiling files as you change them. Compilation
-   errors will be shown in the VSCode's "PROBLEMS" window.
+### Using Loopback 4 cli tool
+Loopback 4 command line tool is installed in the lando environment at machine build, and exposed thru the tool `lb4`;
+to run `lb4` command, just prefix them with the `lando` keyword, eg. `lando lb4 model`, `lando lb4 controller`, etc.
 
-2. Execute "Run Rest Task" from the Command Palette (Cmd+Shift+P) to re-run the
-   test suite and lint the code for both programming and style errors. Linting
-   errors will be shown in VSCode's "PROBLEMS" window. Failed tests are printed
-   to terminal output only.
-
-### Other editors/IDEs
-
-1. Open a new terminal window/tab and start the continuous build process via
-   `npm run build:watch`. It will run TypeScript compiler in watch mode,
-   recompiling files as you change them. Any compilation errors will be printed
-   to the terminal.
-
-2. In your main terminal window/tab, run `npm run test:dev` to re-run the test
-   suite and lint the code for both programming and style errors. You should run
-   this command manually whenever you have new changes to test. Test failures
-   and linter errors will be printed to the terminal.
+### Tools
+Any configurable HTTP tool can be use to test the API - even `curl` - although a GUI tools (as [Insomnia](https://insomnia.rest/))
+can be extremely useful.
