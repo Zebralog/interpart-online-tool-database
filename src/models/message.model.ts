@@ -35,6 +35,13 @@ export class Message extends Entity {
   language: string;
 
   @property({
+    type: 'string',
+    name: 'question',
+    description: "The original question.",
+  })
+  question?: string;
+
+  @property({
     type: 'object',
     name: 'translations',
     description: "Key/value object with message translations (keys are language codes).",
