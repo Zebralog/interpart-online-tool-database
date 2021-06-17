@@ -68,3 +68,4 @@ typings/
 # local config files
 /src/*.local.ts
 /src/*/*.local.ts
+/.lando*
