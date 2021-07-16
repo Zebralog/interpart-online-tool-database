@@ -4,7 +4,13 @@ This application is generated using [LoopBack 4 CLI](https://loopback.io/doc/en/
 [initial project layout](https://loopback.io/doc/en/lb4/Loopback-application-layout.html).
 An example of frontend client app can be found [here](https://github.com/Zebralog/interpart-online-tool-app).
 
-The following content is the original LoopBack README.md.
+### Quickstart
+
+  - init the `src/datasources/mysql.datasource.local.ts` from `src/datasources/mysql.datasource.local.ts.template`
+  - init the `src/env.local.ts` from `src/env.local.ts.template`
+  - follow regular LoopBack setup steps (see below).
+
+[The following content is the original LoopBack README.md.]
 
 ## Install dependencies
 
