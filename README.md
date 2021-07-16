@@ -2,6 +2,9 @@
 
 This application is generated using [LoopBack 4 CLI](https://loopback.io/doc/en/lb4/Command-line-interface.html) with the
 [initial project layout](https://loopback.io/doc/en/lb4/Loopback-application-layout.html).
+An example of frontend client app can be found [here](https://github.com/Zebralog/interpart-online-tool-app).
+
+The following content is the original LoopBack README.md.
 
 ## Install dependencies
 
